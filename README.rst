@@ -62,13 +62,6 @@ the directory to the current user ``PATH``.
 
     PS > ./install.ps1
 
-Homebrew (for macOS users)
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-    brew install git-secrets
-
 .. warning::
 
     **You're not done yet! You MUST install the git hooks for every repo that
@@ -182,10 +175,17 @@ Each of these options must appear first on the command line.
         do not commit credentials to a repository.
 
 ``--register-gcp``
-    Secret provider which scans files for Google Cloud Platform's (GCP's) crentials JSON files. 
+    Secret provider which scans files for any private keys for Google Cloud Platform. The following
+    checks are added:
+
+    - Any files containing -----BEGIN ... PRIVATE KEY-----
 
 ``--register-azure``
-    Secret provider which scans files for AZURE credentials 
+    Secret provider which scans files for AZURE credentials. The following
+    checks are added:
+
+    - Client id for Azure with pattern 8-4-4-4-12
+    - Various URLs containing patterns like .documents.azure.com, .cloudapp.net, .azureinsight.net, etc
 
 ``--aws-provider``
     Secret provider that outputs credentials found in an INI file. You can
